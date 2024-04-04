@@ -81,10 +81,10 @@ public abstract class BaseService implements Service{
 
     @Override
     public String getStatistics() {
-        return String.format("%s %s%n",this.name,
+        return String.format("%s %s:%n",this.name,
                                        this.getClass().getSimpleName())
                 + String.format("Robots: %s%n",robots.isEmpty()?"none"
                     :robots.stream().map(Robot::getName).collect(Collectors.joining(" ")))
-                + String.format("Supplements %d Hardness: %d%n",this.supplements.size(),this.sumHardness());
+                + String.format("Supplements: %s Hardness: %s%n",this.supplements.size(),this.sumHardness()).trim();
     }
 }

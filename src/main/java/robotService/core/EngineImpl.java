@@ -72,32 +72,31 @@ public class EngineImpl implements Engine {
     }
 
     private String addService(String[] data) {
-        // TODO
-        return null;
+
+        return this.controller.addService(data[0],data[1] );
     }
     private String addSupplement(String[] data) {
-        // TODO
-        return null;
+        return this.controller.addSupplement(data[0]);
     }
 
     private String supplementForService(String[] data) {
-        // TODO
-        return null;
+
+        return this.controller.supplementForService(data[0],data[1] );
     }
 
     private String addRobot(String[] data) {
-        // TODO
-        return null;
+
+        return this.controller.addRobot(data[0],data[1],data[2],data[3],Double.parseDouble(data[4]) );
     }
 
     private String feedingRobot(String[] data) {
-        // TODO
-        return null;
+
+        return this.controller.feedingRobot(data[0]);
     }
 
     private String sumOfAll(String[] data) {
-        // TODO
-        return null;
+
+        return this.controller.sumOfAll(data[0]);
     }
 
     private String getStatistics() {
