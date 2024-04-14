@@ -26,6 +26,7 @@ public class LoanRepository implements Repository{
 
     @Override
     public Loan findFirst(String type) {
-        return loans.stream().filter(loan -> loan.getClass().getSimpleName().equals(type)).findFirst().orElse(null);
+        return loans.stream().filter(loan -> loan.getClass().getSimpleName()
+                                .equals(type)).findFirst().orElse(null);
     }
 }

@@ -63,8 +63,8 @@ public class ControllerImpl implements Controller{
 
     @Override
     public String returnedLoan(String bankName, String loanType) {
-        Bank bank = banks.get(bankName);
-       Loan neededLoan = loans.findFirst(loanType);
+        Bank bank = this.banks.get(bankName);
+       Loan neededLoan = this.loans.findFirst(loanType);
        if (neededLoan == null){
            throw new IllegalArgumentException(String.format(ExceptionMessages.NO_LOAN_FOUND,loanType));
        }
@@ -75,7 +75,7 @@ public class ControllerImpl implements Controller{
 
     @Override
     public String addClient(String bankName, String clientType, String clientName, String clientID, double income) {
-        Bank bank = banks.get(bankName);
+        Bank bank = this.banks.get(bankName);
         boolean isSuitable = bank.getClass().getSimpleName().equals("BranchBank") && clientType.equals("Student")
                 || bank.getClass().getSimpleName().equals("CentralBank") && clientType.equals("Adult");
         Client client;
@@ -101,7 +101,7 @@ public class ControllerImpl implements Controller{
 
     @Override
     public String finalCalculation(String bankName) {
-        Bank bank = banks.get(bankName);
+        Bank bank = this.banks.get(bankName);
         double loansAmount = bank.getLoans().stream().mapToDouble(Loan::getAmount).sum();
         double clientsAmount = bank.getClients().stream().mapToDouble(Client::getIncome).sum();
         return String.format(ConstantMessages.FUNDS_BANK,bankName,loansAmount + clientsAmount);
@@ -110,6 +110,6 @@ public class ControllerImpl implements Controller{
     @Override
     public String getStatistics() {
 
-        return banks.values().stream().map(Bank::getStatistics).collect(Collectors.joining(System.lineSeparator())).trim();
+        return this.banks.values().stream().map(Bank::getStatistics).collect(Collectors.joining(System.lineSeparator())).trim();
     }
 }

@@ -3,6 +3,7 @@ package christmasPastryShop.repositories.interfaces;
 import christmasPastryShop.entities.booths.interfaces.Booth;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class BootRepositoryImpl implements BoothRepository<Booth> {
@@ -17,11 +18,12 @@ public class BootRepositoryImpl implements BoothRepository<Booth> {
 
     @Override
     public Collection<Booth> getAll() {
-        return List.of();
+        return Collections.unmodifiableCollection(booths);
     }
 
     @Override
     public void add(Booth booth) {
+        this.booths.add(booth);
 
     }
 }

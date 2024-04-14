@@ -53,25 +53,25 @@ public abstract class BaseBank implements Bank{
         if (this.clients.size() >= this.capacity){
             throw new IllegalStateException(ExceptionMessages.NOT_ENOUGH_CAPACITY_FOR_CLIENT);
         }
-        clients.add(client);
+        this.clients.add(client);
 
     }
 
     @Override
     public void removeClient(Client client) {
-        clients.remove(client);
+        this.clients.remove(client);
 
     }
 
     @Override
     public void addLoan(Loan loan) {
-        loans.add(loan);
+        this.loans.add(loan);
 
     }
 
     @Override
     public int sumOfInterestRates() {
-        return loans.stream().mapToInt(Loan::getInterestRate).sum();
+        return this.loans.stream().mapToInt(Loan::getInterestRate).sum();
     }
 
     @Override
@@ -80,7 +80,7 @@ public abstract class BaseBank implements Bank{
         sb.append(String.format("Name: %s, Type: %s",this.name,getClass().getSimpleName()));
         sb.append(System.lineSeparator());
         sb.append(String.format("Clients: %s", this.clients.isEmpty()
-                                ? "none" : clients.stream().map(Client::getName)
+                                ? "none" : this.clients.stream().map(Client::getName)
                                 .collect(Collectors.joining(", "))).trim());
         sb.append(System.lineSeparator());
         sb.append(String.format("Loans: %s, Sum of interest rates: %s",loans.size(),this.sumOfInterestRates()));
