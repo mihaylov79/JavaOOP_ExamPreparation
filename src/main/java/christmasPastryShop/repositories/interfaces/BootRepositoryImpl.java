@@ -2,6 +2,7 @@ package christmasPastryShop.repositories.interfaces;
 
 import christmasPastryShop.entities.booths.interfaces.Booth;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -9,6 +10,11 @@ import java.util.List;
 public class BootRepositoryImpl implements BoothRepository<Booth> {
 
     private Collection<Booth> booths;
+
+    public BootRepositoryImpl() {
+        this.booths = new ArrayList<>();
+    }
+
     @Override
     public Booth getByNumber(int number) {
         return  this.booths.stream()

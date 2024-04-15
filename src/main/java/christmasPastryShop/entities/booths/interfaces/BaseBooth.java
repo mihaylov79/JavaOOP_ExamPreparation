@@ -79,7 +79,7 @@ public abstract class BaseBooth implements Booth{
         bill += this.delicacyOrders.stream().mapToDouble(Delicacy::getPrice).sum();
         bill += this.cocktailOrders.stream().mapToDouble(Cocktail::getPrice).sum();
         bill += getPrice();
-        return 0;
+        return bill;
     }
 
     @Override

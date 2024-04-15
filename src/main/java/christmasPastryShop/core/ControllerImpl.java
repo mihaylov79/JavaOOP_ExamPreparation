@@ -41,10 +41,7 @@ public class ControllerImpl implements Controller {
 
     @Override
     public String addDelicacy(String type, String name, double price) {
-        Delicacy delicacy = delicacyRepository.getByName(name);
-        if (delicacy == null){
-            throw new IllegalArgumentException(String.format(ExceptionMessages.FOOD_OR_DRINK_EXIST,type,name));
-        }
+        Delicacy delicacy = null;
         switch (type){
             case "Gingerbread":
                 delicacy = new Gingerbread(name,price);
@@ -53,11 +50,11 @@ public class ControllerImpl implements Controller {
                 delicacy = new Stolen(name , price);
                 break;
         }
-//        delicacyRepository.getAll().forEach(d -> {
-//            if (d.getName().equals(name)){
-//                throw new IllegalArgumentException(String.format(ExceptionMessages.FOOD_OR_DRINK_EXIST,type,name));
-//            }
-//        } );
+        delicacyRepository.getAll().forEach(d -> {
+            if (d.getName().equals(name)){
+                throw new IllegalArgumentException(String.format(ExceptionMessages.FOOD_OR_DRINK_EXIST,type,name));
+            }
+        } );
 
         delicacyRepository.add(delicacy);
 
@@ -111,7 +108,7 @@ public class ControllerImpl implements Controller {
     @Override
     public String reserveBooth(int numberOfPeople) {
         Booth freeBooth = boothRepository.getAll().stream()
-                        .filter(booth -> booth.getCapacity() <= numberOfPeople
+                        .filter(booth -> booth.getCapacity() >= numberOfPeople
                         && !booth.isReserved())
                         .findFirst()
                         .orElse(null);

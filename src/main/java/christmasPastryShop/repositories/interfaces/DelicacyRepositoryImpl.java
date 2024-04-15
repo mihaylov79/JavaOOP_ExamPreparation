@@ -2,13 +2,19 @@ package christmasPastryShop.repositories.interfaces;
 
 import christmasPastryShop.entities.delicacies.interfaces.Delicacy;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+
 
 public class DelicacyRepositoryImpl implements DelicacyRepository<Delicacy> {
 
     private Collection<Delicacy> delicacies;
+
+    public DelicacyRepositoryImpl() {
+        this.delicacies = new ArrayList<>();
+    }
+
     @Override
     public Delicacy getByName(String name) {
         return delicacies.stream()
