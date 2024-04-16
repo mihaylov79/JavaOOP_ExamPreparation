@@ -5,11 +5,10 @@ import christmasPastryShop.entities.cocktails.interfaces.Cocktail;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 public class CocktailRepositoryImpl implements CocktailRepository<Cocktail>{
 
-    private Collection<Cocktail> cocktails;
+   private Collection<Cocktail> cocktails;
 
     public CocktailRepositoryImpl() {
         this.cocktails = new ArrayList<>();

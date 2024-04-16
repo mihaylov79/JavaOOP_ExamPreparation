@@ -15,9 +15,7 @@ import christmasPastryShop.entities.delicacies.interfaces.Stolen;
 import christmasPastryShop.repositories.interfaces.BoothRepository;
 import christmasPastryShop.repositories.interfaces.CocktailRepository;
 import christmasPastryShop.repositories.interfaces.DelicacyRepository;
-import christmasPastryShop.repositories.interfaces.DelicacyRepositoryImpl;
 
-import java.util.Optional;
 
 public class ControllerImpl implements Controller {
 
@@ -41,6 +39,12 @@ public class ControllerImpl implements Controller {
 
     @Override
     public String addDelicacy(String type, String name, double price) {
+        delicacyRepository.getAll().forEach(d -> {
+            if (d.getName().equals(name)){
+                throw new IllegalArgumentException(String.format(ExceptionMessages.FOOD_OR_DRINK_EXIST,type,name));
+            }
+        } );
+
         Delicacy delicacy = null;
         switch (type){
             case "Gingerbread":
@@ -50,11 +54,7 @@ public class ControllerImpl implements Controller {
                 delicacy = new Stolen(name , price);
                 break;
         }
-        delicacyRepository.getAll().forEach(d -> {
-            if (d.getName().equals(name)){
-                throw new IllegalArgumentException(String.format(ExceptionMessages.FOOD_OR_DRINK_EXIST,type,name));
-            }
-        } );
+
 
         delicacyRepository.add(delicacy);
 
@@ -63,6 +63,12 @@ public class ControllerImpl implements Controller {
 
     @Override
     public String addCocktail(String type, String name, int size, String brand) {
+        cocktailRepository.getAll().forEach(c -> {
+            if (c.getName().equals(name)){
+                throw new IllegalArgumentException(String.format(ExceptionMessages.FOOD_OR_DRINK_EXIST,type,name));
+            }
+        });
+
         Cocktail cocktail = null;
         switch (type){
             case "Hibernation":
@@ -71,11 +77,7 @@ public class ControllerImpl implements Controller {
             case "MulledWine":
                 cocktail = new MulledWine(name, size, brand);
         }
-        cocktailRepository.getAll().forEach(c -> {
-            if (c.getName().equals(name)){
-                throw new IllegalArgumentException(String.format(ExceptionMessages.FOOD_OR_DRINK_EXIST,type,name));
-            }
-        });
+
 
         cocktailRepository.add(cocktail);
 
@@ -84,6 +86,12 @@ public class ControllerImpl implements Controller {
 
     @Override
     public String addBooth(String type, int boothNumber, int capacity) {
+        boothRepository.getAll().forEach(b -> {
+            if (b.getBoothNumber() == boothNumber){
+                throw  new IllegalArgumentException(String.format(ExceptionMessages.BOOTH_EXIST,boothNumber));
+            }
+        });
+
         Booth booth = null;
 
         switch (type){
@@ -95,11 +103,7 @@ public class ControllerImpl implements Controller {
                 break;
         }
 
-        boothRepository.getAll().forEach(b -> {
-            if (b.getBoothNumber() == boothNumber){
-                throw  new IllegalArgumentException(String.format(ExceptionMessages.BOOTH_EXIST,boothNumber));
-            }
-        });
+
 
         boothRepository.add(booth);
         return String.format(OutputMessages.BOOTH_ADDED,boothNumber);
@@ -122,15 +126,16 @@ public class ControllerImpl implements Controller {
 
     @Override
     public String leaveBooth(int boothNumber) {
-        double bill = this.boothRepository.getByNumber(boothNumber).getBill();
+        Booth booth = this.boothRepository.getByNumber(boothNumber);
+        double bill = booth.getBill();
         this.totalIncome += bill;
-        this.boothRepository.getByNumber(boothNumber).clear();
-        return String.format("Booth: %d%nBill: %.2f",boothNumber,bill);
+        booth.clear();
+        return String.format(OutputMessages.BILL,boothNumber,bill);
     }
 
     @Override
     public String getIncome() {
-        //TODO
-        return String.format("Income: %.2flv",this.totalIncome);
+
+        return String.format(OutputMessages.TOTAL_INCOME,this.totalIncome);
     }
 }

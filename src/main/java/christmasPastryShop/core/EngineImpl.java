@@ -76,6 +76,7 @@ public class EngineImpl implements Engine {
         }
 
 
+        assert result != null;
         return result.trim();
     }
 

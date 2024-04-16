@@ -5,13 +5,12 @@ import christmasPastryShop.entities.booths.interfaces.Booth;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
-public class BootRepositoryImpl implements BoothRepository<Booth> {
+public class BoothRepositoryImpl implements BoothRepository<Booth> {
 
     private Collection<Booth> booths;
 
-    public BootRepositoryImpl() {
+    public BoothRepositoryImpl() {
         this.booths = new ArrayList<>();
     }
 

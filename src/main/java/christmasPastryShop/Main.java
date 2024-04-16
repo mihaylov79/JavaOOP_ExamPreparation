@@ -17,7 +17,7 @@ public class Main {
         int a1 = a.length();
         DelicacyRepository<Delicacy> delicacyRepository = new DelicacyRepositoryImpl(); // TODO: new DelicacyRepositoryImpl<>();
         CocktailRepository<Cocktail> cocktailRepository = new CocktailRepositoryImpl(); // TODO: new CocktailRepositoryImpl<>();
-        BoothRepository<Booth> boothRepository = new BootRepositoryImpl(); // TODO: new BoothRepositoryImpl<>();
+        BoothRepository<Booth> boothRepository = new BoothRepositoryImpl(); // TODO: new BoothRepositoryImpl<>();
 
         Controller controller = new ControllerImpl(delicacyRepository,cocktailRepository,boothRepository); // TODO: new ControllerImpl(delicacyRepository, cocktailRepository, boothRepository);
 

@@ -31,7 +31,7 @@ public abstract class BaseBooth implements Booth{
 
     private void setCapacity(int capacity) {
 
-        if (capacity < 0){
+        if (capacity <= 0){
             throw new IllegalArgumentException(ExceptionMessages.INVALID_TABLE_CAPACITY);
         }
         this.capacity = capacity;
@@ -56,13 +56,16 @@ public abstract class BaseBooth implements Booth{
 
     @Override
     public boolean isReserved() {
-        return isReserved;
+        return this.isReserved;
     }
 
     @Override
     public double getPrice() {
+
         return this.price;
     }
+
+
 
     @Override
     public void reserve(int numberOfPeople) {
@@ -84,10 +87,10 @@ public abstract class BaseBooth implements Booth{
 
     @Override
     public void clear() {
+        this.isReserved = false;
+        this.numberOfPeople = 0;
         this.delicacyOrders.clear();
         this.cocktailOrders.clear();
-        isReserved = false;
-        this.numberOfPeople = 0;
         this.price = 0;
 
     }
