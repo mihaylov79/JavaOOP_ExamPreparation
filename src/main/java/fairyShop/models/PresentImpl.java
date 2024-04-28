@@ -45,9 +45,10 @@ public class PresentImpl implements Present{
     @Override
     public void getCrafted() {
 
-        this.energyRequired -= 10;
-        if (this.energyRequired < 0 ){
+        if (this.energyRequired  - 10 < 0 ){
             energyRequired = 0;
+        }else {
+            this.energyRequired -= 10;
         }
 
     }

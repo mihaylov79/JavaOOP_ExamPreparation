@@ -12,18 +12,26 @@ public class ShopImpl implements Shop{
 
         if (helper.canWork()){
             helper.getInstruments().forEach(instrument -> {
-                while (!instrument.isBroken()){
-                    if (!instrument.isBroken() && helper.canWork()){
-                        helper.work();
-                        present.getCrafted();
-                        instrument.use();
-                    }
+                while (!instrument.isBroken() && !present.isDone() && helper.canWork()){
+                    helper.work();
+                    present.getCrafted();
+                    instrument.use();
 
-                    if (present.isDone())
-                        return;
 
-                    if (!helper.canWork())
-                        return;
+//                    if (!present.isDone()){
+//                        helper.work();
+//                        present.getCrafted();
+//                        instrument.use();
+//                    }
+
+//                    if (present.isDone()){
+//                        return;
+//                    }
+
+//                   if (!helper.canWork()){
+//                       return;
+//                   }
+
                 }
 
 

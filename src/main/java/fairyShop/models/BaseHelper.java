@@ -33,7 +33,7 @@ public abstract class BaseHelper implements Helper {
     @Override
     public void work() {
 
-        if (this.energy < 0){
+        if (this.energy - 10 < 0){
             energy = 0;
         }else {
             this.energy -= 10;

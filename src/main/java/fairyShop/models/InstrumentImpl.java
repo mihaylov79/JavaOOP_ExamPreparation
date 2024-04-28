@@ -26,9 +26,11 @@ public class InstrumentImpl implements Instrument{
     @Override
     public void use() {
 
-        this.power -= 10;
-        if (this.power < 0){
+
+        if (this.power - 10 < 0){
             this.power = 0;
+        }else{
+            this.power -= 10;
         }
 
     }
