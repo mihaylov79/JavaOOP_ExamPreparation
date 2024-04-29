@@ -10,14 +10,17 @@ public class Sleepy extends BaseHelper{
 
     @Override
     public void work() {
-        if (this.getEnergy() - 15 < 0){
-            setEnergy(0);
-        }else {
-            setEnergy(getEnergy() - 15);
-        }
-
-
-
-
+        super.work();
+        setEnergy(getEnergy() - 5);
     }
+
+//    @Override
+//    public void work() {
+//        if (this.getEnergy() - 15 < 0){
+//            setEnergy(0);
+//        }else {
+//            setEnergy(getEnergy() - 15);
+//        }
+//
+//    }
 }
